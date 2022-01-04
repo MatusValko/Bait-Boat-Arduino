@@ -1,10 +1,10 @@
-/*
+
 #include <SoftwareSerial.h>
 #include <TinyGPS++.h>
 SoftwareSerial gpsSerial(8,9);
 TinyGPSPlus gps;
 float lattitude,longitude;
-*/
+
 
 #include <Servo.h>
 
@@ -59,8 +59,8 @@ void setup() {
 }
 
 void loop() {
-  /*
-   * 
+  
+   
   while (gpsSerial.available())
   {
     Serial.print ("lattitude: ");
@@ -75,7 +75,7 @@ void loop() {
       Serial.println (longitude);
     }
   }
-*/
+
   //stlacenie tlacidla na otvorenie poklopu
   if(poklop == false && tlacidlo == false){
     for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
@@ -123,14 +123,14 @@ else if(lux>400 && svetlo == true){
   x = compass.getX();
   y = compass.getY();
   z = compass.getZ();
-/*
+
   Serial.print("X: ");
   Serial.print(x);
   Serial.print("   Y: ");
   Serial.print(y);
   Serial.print("   Z: ");
   Serial.println(z);
-*/
+
  
   xValue = analogRead(joyX);
   yValue = analogRead(joyY);
@@ -158,5 +158,5 @@ else if(lux>400 && svetlo == true){
 
   
 
-delay(500);
+delay(300);
 }
