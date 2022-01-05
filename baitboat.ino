@@ -13,30 +13,30 @@ float lattitude,longitude;
 #define joyY A1
 int xValue,yValue;
 
-// I2C Library
+// I2C knižnica
 #include <Wire.h>
-// BH1750 Light Sensor Library
+// BH1750 Light Sensor knižnica
 #include <BH1750.h>
-// QMC5883L Compass Library
+// QMC5883L Compass knižnica
 #include <QMC5883LCompass.h>
 
 BH1750 lightMeter;
 QMC5883LCompass compass;
 
 
-Servo servo_1; // servo controller (multiple can exist)
-int servo_pin = 3; // PWM pin for servo control
-int pos = 0;    // servo starting position
+Servo servo_1; // servo kontrolér (môže existovať viacej než jeden)
+int servo_pin = 3; // PWM pin na ovládanie serva
+int pos = 0;    // štartovacia pozicia serva
 
 bool poklop = false;
 bool svetlo = false;
 bool tlacidlo = false;
 
 void setup() {
-  // Initialize the serial port.
+  // inicializácia sériového posrtu.
   Serial.begin(9600);
   
-    // Initialize I2C.
+    // inicializácia I2C.
    Wire.begin();
 
    
@@ -50,10 +50,10 @@ void setup() {
   Serial.println(F("BH1750 Test"));
 
 
-  // Initialize the Compass.
+  // inicializácia kompasu magnetometru
   compass.init();
 
-  servo_1.attach(servo_pin); // start servo control
+  servo_1.attach(servo_pin); // štart servomotora
 
   
 }
@@ -78,19 +78,19 @@ void loop() {
 
   //stlacenie tlacidla na otvorenie poklopu
   if(poklop == false && tlacidlo == false){
-    for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
-        servo_1.write(pos);              // tell servo to go to position in variable 'pos'
-        delay(15); // delay to allow the servo to reach the desired position
+    for (pos = 0; pos <= 180; pos += 1) { // 0 až 180 stupnov
+        servo_1.write(pos);              // chod na miesto
+        delay(15); // oneskorenie aby sa dostalo servo do ciela
       }
     if (pos==90){
-        delay(3000); // wait 5 seconds once positioned at 90 degrees
+        delay(3000); // cakaj 3 sekundy na 90 stupnoch
       }
     tlacidlo = true;
   }
   
   if(poklop == false && tlacidlo == true){
-    for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
-      servo_1.write(pos);              // tell servo to go to position in variable 'pos'
+    for (pos = 180; pos >= 0; pos -= 1) {
+      servo_1.write(pos);              
       delay(15);
     }
     if (pos==90){
@@ -117,7 +117,7 @@ else if(lux>400 && svetlo == true){
 
 
   int x, y, z;
-  // Read compass values
+  // čítaj hodnoty na kompase
   compass.read();
 
   x = compass.getX();
@@ -135,7 +135,6 @@ else if(lux>400 && svetlo == true){
   xValue = analogRead(joyX);
   yValue = analogRead(joyY);
  
-  //print the values with to plot or view
   Serial.print(xValue);
   Serial.print("\t");
   Serial.println(yValue);
