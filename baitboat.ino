@@ -52,7 +52,6 @@ void setup() {
   compass.init();
 
   servo_1.attach(servo_pin); // štart servomotora
-  
 }
 
 void loop() {
