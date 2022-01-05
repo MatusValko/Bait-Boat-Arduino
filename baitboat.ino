@@ -39,7 +39,6 @@ void setup() {
     // inicializácia I2C.
    Wire.begin();
 
-   
   if (lightMeter.begin()) {
     Serial.println(F("BH1750 initialised"));
   }
@@ -49,12 +48,10 @@ void setup() {
   
   Serial.println(F("BH1750 Test"));
 
-
   // inicializácia kompasu magnetometru
   compass.init();
 
   servo_1.attach(servo_pin); // štart servomotora
-
   
 }
 
